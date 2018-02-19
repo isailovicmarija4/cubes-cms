@@ -1,1 +1,1 @@
-# cubes-cms
+Cubes CMS
