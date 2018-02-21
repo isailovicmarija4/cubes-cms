@@ -76,7 +76,7 @@
 				Specs
 			</h3>
 			<div class="block">
-				{{$product->specification}}
+				{!! $product->specification !!}
 			</div>
 		</div>
 	</div>

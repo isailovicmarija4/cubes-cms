@@ -262,6 +262,12 @@
 @endpush
 
 @push('footer_javascript')
+
+<script src="{{url('/skins/admin/vendor/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+<script src="{{url('/skins/admin/vendor/ckeditor/adapters/jquery.js')}}" type="text/javascript"></script>
+
+
+
 <script src="{{url('/skins/admin/vendor/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script>
 	$('#row-form select[name="product_category_id"]').select2({
@@ -276,6 +282,43 @@
 		'placeholder': "Choose minimum 3 tags",
 		'allowClear': true
 	});
+        
+        $('#row-form [name="specification"]').ckeditor({
+            'width':'800px',
+             'height':'700px',
+             'bodyId':'content',
+             'bodyClass':'block',
+             'allowedContent':true,
+            // 'forcePasteAsPlainText':true,
+           
+             'contentsCss':[
+                 '{{url('/skins/front/plugins/bootstrap/dist/css/bootstrap.min.css')}}',
+                 '{{url('/skins/front/plugins/font-awesome/css/font-awesome.min.css')}}',
+                 '{{url('/skins/front/css/theme-style.css')}}',
+                 '{{url('/skins/front/css/custom-style.css')}}',
+                 '{{url('/skins/front/css/colour-blue.css')}}',
+             ],
+            'toolbarGroups':[
+                 { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+		{ name: 'forms', groups: [ 'forms' ] },
+		'/',
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+		{ name: 'links', groups: [ 'links' ] },
+		{ name: 'insert', groups: [ 'insert' ] },
+		'/',
+		{ name: 'styles', groups: [ 'styles' ] },
+		{ name: 'colors', groups: [ 'colors' ] },
+		{ name: 'tools', groups: [ 'tools' ] },
+		{ name: 'others', groups: [ 'others' ] },
+		{ name: 'about', groups: [ 'about' ] }
+            ],
+            'removeButtons':'Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Save,NewPage,Preview,Print,Anchor,Flash,Iframe,PageBreak',
+        });
+        
+        
 </script>
 
 @endpush
