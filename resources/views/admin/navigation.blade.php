@@ -5,6 +5,18 @@
 			<span class="nav-link-text">Dashboard</span>
 		</a>
 	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Index Slides">
+		<a class="nav-link" href="{{route('admin.index-slides.index')}}">
+			<i class="fa fa-fw fa-photo"></i>
+			<span class="nav-link-text">Index Slides</span>
+		</a>
+	</li>
+	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="File Manager">
+		<a class="nav-link" href="{{route('admin.filemanager.index')}}">
+			<i class="fa fa-fw fa-dashboard"></i>
+			<span class="nav-link-text">File Manager</span>
+		</a>
+	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
 		<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#products-submenu" data-parent="#sideMenu">
 			<i class="fa fa-fw fa-barcode"></i>

@@ -35,8 +35,15 @@
 											@endforeach
 										</ul>
 									</li>
-									
+									@foreach(\App\Models\StaticPage::enabled()->rootPages()->get() as $rootStaticPage)
 									<li>
+										<a
+                                                                                    href="{{$rootStaticPage->frontendUrl()}}"
+                                                        
+                                                                                    >{{$rootStaticPage->short_title}}</a>
+									</li>
+                                                                        @endforeach
+                                                                        <li>
 										<a href="{{route('contact-us')}}">Contact Us</a>
 									</li>
 									<li>

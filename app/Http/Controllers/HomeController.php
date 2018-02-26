@@ -14,11 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        ///using enabled scope
-	$indexSlides=IndexSlide::enabled()->orderBy('order_number')->get();
-        return view('front.home.index',[
-            'indexSlides'=>$indexSlides
-        ]);
+		//using enabled scope
+		$indexSlides = IndexSlide::enabled()->orderBy('order_number')->get();
+		
+        return view('front.home.index', [
+			'indexSlides' => $indexSlides
+		]);
     }
 }

@@ -35,7 +35,9 @@ class IndexSlidesController extends Controller
 		]);
 		
 		$indexSlide = new IndexSlide($formData);
-		$indexSlide->order_number=IndexSlide::count() + 1;
+		
+		$indexSlide->order_number = IndexSlide::count() + 1;
+		
 		$indexSlide->save();
 		
 		if ($request->hasFile('slide_photo_file')) {
@@ -122,12 +124,12 @@ class IndexSlidesController extends Controller
 		
 		//delete from database
 		$indexSlide->delete();
-                IndexSlide::where('order_number','>',$indexSlide->order_number)
-                        ->decrement('order_number');
-                    //    ->update([
-                      //      'order_number' => \DB::raw('order_number - 1')
-                            
-                      //  ]);
+		
+		IndexSlide::where('order_number', '>', $indexSlide->order_number)
+				->decrement('order_number');
+		//		->update([
+		//			'order_number' => \DB::raw('order_number - 1')
+		//		]);
 		
 		//see if photo file exists
 		if (
@@ -144,40 +146,52 @@ class IndexSlidesController extends Controller
 		return redirect()->route('admin.index-slides.index')
 				->with('systemMessage', 'Slide has been deleted');
 	}
-        public function enable(){
-            $request = request();
+	
+	public function enable() {
+		$request = request();
 		
 		$indexSlide = IndexSlide::findOrFail($request->input('id'));
-                $indexSlide->status = IndexSlide::STATUS_ENABLED;
-                  $indexSlide->save();
-                  
+		
+		$indexSlide->status = IndexSlide::STATUS_ENABLED;
+		
+		$indexSlide->save();
+		
 		return redirect()->route('admin.index-slides.index')
 				->with('systemMessage', 'Slide has been enabled');
-		
-        }
-         public function disable(){
-            $request = request();
+	}
+	
+	public function disable() {
+		$request = request();
 		
 		$indexSlide = IndexSlide::findOrFail($request->input('id'));
-                 $indexSlide->status = IndexSlide::STATUS_DISABLED;
-                  $indexSlide->save();
-                  
-		return redirect()->route('admin.index-slides.index')
-				->with('systemMessage', 'Slide has been disabled');
-                
 		
-        }
-        public function reorder(){
-              $request = request();
-              $orderIds=  $request->input('order_ids');
-              $ids= explode(',', $orderIds);
-              foreach($ids as $key=> $id){
-                  $indexSlide=IndexSlide::findOrFail($id);
-                  $indexSlide->order_number=$key +1;
-                  $indexSlide->save();
-                  return redirect()->route('admin.index-slides.index')
+		$indexSlide->status = IndexSlide::STATUS_DISABLED;
+		
+		$indexSlide->save();
+		
+		return redirect()->route('admin.index-slides.index')
+				->with('systemMessage', 'Slide has been enabled');
+	}
+	
+	public function reorder() {
+		
+		$request = request();
+		
+		$orderIds = $request->input('order_ids');
+		//$orderIds = "12,56,43"
+		
+		$ids = explode(',', $orderIds);
+		//$ids = ['12', '56', '43']
+		
+		foreach ($ids as $key => $id) {
+			$indexSlide = IndexSlide::findOrFail($id);
+			
+			$indexSlide->order_number = $key + 1;
+			
+			$indexSlide->save();
+		}
+		
+		return redirect()->route('admin.index-slides.index')
 				->with('systemMessage', 'Slides have been reordered');
-                  
-              }
-        }
+	}
 }
