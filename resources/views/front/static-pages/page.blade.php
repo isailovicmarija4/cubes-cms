@@ -48,7 +48,7 @@
 							<div class="block">
 								
 								<ul class="nav nav-list secondary-nav">
-                                                                    @foreach($staticPage->childPages()->enabled() as $childPage)
+                                                                    @foreach($staticPage->childPages()->enabled()->get() as $childPage)
 									<li>
                                                                             <a href="{{$childPage->frontendUrl()}}">{{$childPage->short_title}}</a>
 									</li>

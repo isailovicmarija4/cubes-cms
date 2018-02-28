@@ -138,7 +138,22 @@ Route::middleware('auth')
 	Route::post('/index-slides/disable', 'IndexSlidesController@disable')->name('admin.index-slides.disable');
 	Route::post('/index-slides/reorder', 'IndexSlidesController@reorder')->name('admin.index-slides.reorder');
 	
+        //Filemanager routes
 	Route::get('/filemanager', 'FileManagerController@index')->name('admin.filemanager.index');
 	Route::get('/filemanager/popup', 'FileManagerController@popup')->name('admin.filemanager.popup');
 	Route::any('/filemanager/connector', 'FileManagerController@connector')->name('admin.filemanager.connector');
+        
+        //Static pages routes
+        Route::get('/static-pages/list/{parentId?}', 'StaticPagesController@index')->name('admin.static-pages.index');
+	
+	Route::get('/static-pages/add/{parentId?}', 'StaticPagesController@add')->name('admin.static-pages.add');
+	Route::post('/static-pages/add/{parentId?}', 'StaticPagesController@insert');
+			
+	Route::get('/static-pages/edit/{id}', 'StaticPagesController@edit')->name('admin.static-pages.edit');
+	Route::post('/static-pages/edit/{id}', 'StaticPagesController@update');
+	
+	Route::post('/static-pages/delete', 'StaticPagesController@delete')->name('admin.static-pages.delete');
+	Route::post('/static-pages/enable', 'StaticPagesController@enable')->name('admin.static-pages.enable');
+	Route::post('/static-pages/disable', 'StaticPagesController@disable')->name('admin.static-pages.disable');
+	Route::post('/static-pages/reorder', 'StaticPagesController@reorder')->name('admin.static-pages.reorder');
 });

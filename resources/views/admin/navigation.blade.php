@@ -5,6 +5,12 @@
 			<span class="nav-link-text">Dashboard</span>
 		</a>
 	</li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Static pages">
+		<a class="nav-link" href="{{route('admin.static-pages.index')}}">
+			<i class="fa fa-fw fa-newspaper"></i>
+			<span class="nav-link-text">Static pages</span>
+		</a>
+	</li>
 	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Index Slides">
 		<a class="nav-link" href="{{route('admin.index-slides.index')}}">
 			<i class="fa fa-fw fa-photo"></i>

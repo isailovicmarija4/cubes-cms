@@ -29,7 +29,7 @@ class StaticPage extends Model
     }
 	
 	public function isEnabled() {
-		return $this->status == 1;
+		return $this->status == self::STATUS_ENABLED;
 	}
         public function frontendUrl(){
             return route('static-page',[
