@@ -23,6 +23,12 @@ Route::post('/contact-us', 'ContactController@process');
 
 Route::get('/page/{id}/{slug?}', 'StaticPagesController@page')->name('static-page');
 
+Route::get('/shopping-cart', 'ShoppingCartController@index')->name('shopping-cart');
+Route::post('/shopping-cart/add-product', 'ShoppingCartController@addProduct')->name('shopping-cart.add-product');
+Route::post('/shopping-cart/remove-product', 'ShoppingCartController@removeProduct')->name('shopping-cart.remove-product');
+
+
+
 Auth::routes();
 
 // CMS Admin routes

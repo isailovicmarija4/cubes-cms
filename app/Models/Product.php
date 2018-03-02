@@ -36,4 +36,10 @@ class Product extends Model
 			'tag_id'
 		);
 	}
+        public function photoUrl(){
+            if($this->photo_filename &&  \Storage::disk('public')->exists('/products/' . $this->photo_filename)){
+               return \Storage::disk('public')->exists('/products/' . $this->photo_filename);
+            }
+            return '';
+        }
 }

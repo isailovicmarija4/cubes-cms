@@ -67,8 +67,33 @@
 				<h4>
 					<strong>Price: </strong>
 					{{number_format($product->price, 2)}} din
-					<a href="#" class="btn btn-primary pull-right">Buy</a>
+					
 				</h4>
+                                <hr>
+                                <form method="post" action="{{route('shopping-cart.add-product')}}">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <div class="text-right">
+                                        <label>Quantity: </label>
+                                        <input type="number" value="1" name="quantity">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-shopping-cart">
+                                                
+                                            </i>
+                                        </button>
+                                    </div>
+                                    
+                                    
+                                    @foreach($errors->all() as $errorMessage)
+                                    <div class="text-danger">
+                                        {{$errorMessage}}
+                                    </div>
+                                    @endforeach
+                                    
+                                    
+                                    
+                                </form>
+                                
 			</div>
 		</div>
 		<div class="block">

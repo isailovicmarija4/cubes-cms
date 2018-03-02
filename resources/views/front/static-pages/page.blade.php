@@ -26,18 +26,19 @@
 				<div class="row">
 					<div class="col-md-8 blog-post">
 						<div class="media">
+                                                    @if($staticPage->photo_filename)
 							<img 
-								src="/skins/front/img/portfolio/enkel-home-blue.png"
+                                                            src="{{\Storage::disk('public')->url('/static-pages/' . $staticPage->photo_filename)}}"
 								alt="{{$staticPage->title}}" 
 								class="media-object" />
-							
+							@endif
 							<div class="media-body">
 								<h1 class="title media-heading">{{$staticPage->title}}</h1>
 								<!-- Meta details -->
 								<p class="lead">{{$staticPage->description}}</p>
 								
 								<div class="content-body">
-									{{$staticPage->body}}
+									{!!$staticPage->body!!}
 								</div>	
 							</div>
 						</div>

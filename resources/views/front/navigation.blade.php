@@ -46,6 +46,14 @@
                                                                         <li>
 										<a href="{{route('contact-us')}}">Contact Us</a>
 									</li>
+                                                                        <li>
+                                                                            <a href="{{route('shopping-cart')}}">
+                                                                                <span class="badge badge-info">
+                                                                                    0
+                                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                                </span>
+                                                                            </a>
+									</li>
 									<li>
 										<a href="{{route('login')}}">Login</a>
 									</li>

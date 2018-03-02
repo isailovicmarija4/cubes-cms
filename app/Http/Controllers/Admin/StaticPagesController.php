@@ -47,13 +47,14 @@ class StaticPagesController extends Controller
 			'body' => 'present',
 			'page_photo_file' => 'image|mimes:jpeg|max:10240|dimensions:min_width=100,min_height=100',
 		]);
-                $formData['parent_id']=$parentPage;
+                $formData['parent_id']=$parentId;
 		
 		$staticPage = new StaticPage($formData);
 		
 		$staticPage->order_number = StaticPage::where('parent_id','=',$parentId)->count() + 1;
 		
 		$staticPage->save();
+              
 		
 		if ($request->hasFile('page_photo_file')) {
 			// file has been uploaded
@@ -68,6 +69,10 @@ class StaticPagesController extends Controller
 			
 			$staticPage->photo_filename = $newFileName;
 			$staticPage->save();
+                        $photoFilePath=public_path('/storage/static-pages/' . $newFileName);
+                         $img= \Image::make($photoFilePath);
+                         $img->fit(640,480);
+                         $img->save();
 		}
 		
 		return redirect()->route('admin.static-pages.index',[
@@ -79,7 +84,7 @@ class StaticPagesController extends Controller
 	public function edit($id) {
 		
 		$staticPage = StaticPage::findOrFail($id);
-		$parentPage=$staticPage->parentPage;
+		
 		
 		return view('admin.static-pages.edit', [
 			'staticPage' => $staticPage
@@ -126,6 +131,10 @@ class StaticPagesController extends Controller
 			//update new file name in database
 			$staticPage->photo_filename = $newFileName;
 			$staticPage->save();
+                         $photoFilePath=public_path('/storage/static-pages/' . $newFileName);
+                         $img= \Image::make($photoFilePath);
+                         $img->fit(750);
+                         $img->save();
 		}
 		
 		
