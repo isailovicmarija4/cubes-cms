@@ -70,7 +70,7 @@
 							<tbody>
 								<tr>
 									<th>Name:</th>
-									<td>First Last</td>
+									<td>{{$checkout->getCustomerName()}}</td>
 								</tr>
 								<tr>
 									<th>Email:</th>

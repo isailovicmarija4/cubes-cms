@@ -20,6 +20,7 @@
 			<div class="col-md-12">
 				<!-- system messages -->
 				@include('front.global-partials.system-messages')
+                                @if(!$shoppingCart->isEmpty())
 				<table id="shopping-cart-table" class="table table-striped table-hover">
 					<thead>
 						<th></th>
@@ -30,60 +31,65 @@
 						<th class="text-right" colspan="2">Subtotal</th>
 					</thead>
 					<tbody>
+                                            @foreach($shoppingCart->getItems() as $shoppingCartItem)
 						<tr>
 							<td class="text-center">
 								<button 
 									data-action="delete" 
-									data-id="1"
+                                                                        data-id="{{$shoppingCartItem->getProductId()}}"
 									><i class="fa fa-trash"></i>
 								</button>
 							</td>
 							<td>
-								<img src="/skins/front/img/portfolio/enkel-home-blue.png" style="width: 100px;" alt="">
+                                                            @if($shoppingCartItem->getProductPhotoUrl())
+								<img src="{{$shoppingCartItem->getProductPhotoUrl()}}" style="width: 100px;" alt="">
+                                                                @endif
 							</td>
-							<td>Samsung UE-32J4000AWXXH</td>
+							<td>{{$shoppingCartItem->getProductTitle()}}</td>
 							<td class="text-right">
-								32985.76
+								{{number_format($shoppingCartItem->getProductPrice(),2)}}
 								din.
 							</td>
 							<td class="text-center">x</td>
 							<td class="text-right">
-								2
+								{{$shoppingCartItem->getQuantity()}}
 							</td>
 							<td class="text-center">=</td>
 							<td class="text-right">
-								65971.52
+								{{number_format($shoppingCartItem->subtotal(),2)}}
 								din.
 							</td>
 						</tr>
+                                                @endforeach
 					</tbody>
 					<tfoot>
 						<th class="h2 text-right" colspan="7">TOTAL:</th>
 						<td class="h2 text-right">
-							65971.52
+						{{number_format($shoppingCart->total(),2)}}
 							din.
 						</td>
 					</tfoot>
 				</table>
 				<hr>
 				<div class="text-right">
-					<a href="#" class="btn btn-success">
+					<a href="{{route('checkout')}}" class="btn btn-success">
 						<i class="fa fa-credit-card"></i>
 						Checkout
 					</a>
 				</div>
-				
+				@else
 				<div class="jumbotron">
 					<h1>Shopping cart is empty</h1>
 				</div>
+                                @endif
 			</div>
 		</div>
 	</div>
 </div>
 
-<form method="post" action="#" class="modal fade" id="delete-record-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<form method="post" action="{{route('shopping-cart.remove-product')}}" class="modal fade" id="delete-record-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	{{csrf_field()}}
-	<input type="hidden" name="id" value="">
+	<input type="hidden" name="product_id" value="">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -116,7 +122,7 @@
 		
 		var deletePopup = $('#delete-record-modal');
 		
-		deletePopup.find('[name="id"]').val(id);
+		deletePopup.find('[name="product_id"]').val(id);
 		
 		deletePopup.modal('show');
 	});

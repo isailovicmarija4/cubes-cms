@@ -28,7 +28,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your name:</label>  
 									<div class="col-md-5">
-										<input name="customerName" class="form-control" type="text" value="{{old('customerName')}}">
+                                                                            <input name="customerName" class="form-control" type="text" value="{{old('customerName',$checkout->getCustomerName())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerName'))
@@ -43,7 +43,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your email:</label>  
 									<div class="col-md-5">
-										<input name="customerEmail" class="form-control" type="text" value="{{old('customerEmail')}}">
+										<input name="customerEmail" class="form-control" type="text" value="{{old('customerEmail',$checkout->getCustomerEmail())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerEmail'))
@@ -58,7 +58,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your phone:</label>  
 									<div class="col-md-5">
-										<input name="customerPhone" class="form-control" type="text" value="{{old('customerPhone')}}">
+										<input name="customerPhone" class="form-control" type="text" value="{{old('customerPhone',$checkout->getCustomerPhone())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerPhone'))
@@ -73,7 +73,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your Country:</label>  
 									<div class="col-md-5">
-										<input name="customerCountry" class="form-control" type="text" value="{{old('customerCountry')}}">
+										<input name="customerCountry" class="form-control" type="text" value="{{old('customerCountry',$checkout->getCustomerCountry())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerCountry'))
@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your City:</label>  
 									<div class="col-md-5">
-										<input name="customerCity" class="form-control" type="text" value="{{old('customerCity')}}">
+										<input name="customerCity" class="form-control" type="text" value="{{old('customerCity',$checkout->getCustomerCity())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerCity'))
@@ -103,7 +103,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your ZIP Code:</label>  
 									<div class="col-md-5">
-										<input name="customerZip" class="form-control" type="text" value="{{old('customerZip')}}">
+										<input name="customerZip" class="form-control" type="text" value="{{old('customerZip',$checkout->getCustomerZip())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerZip'))
@@ -118,7 +118,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Your Address:</label>  
 									<div class="col-md-5">
-										<input name="customerAddress" class="form-control" type="text" value="{{old('customerAddress')}}">
+										<input name="customerAddress" class="form-control" type="text" value="{{old('customerAddress',$checkout->getCustomerAddress())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('customerAddress'))
@@ -148,7 +148,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Delivery Country:</label>  
 									<div class="col-md-5">
-										<input name="deliveryCountry" class="form-control" type="text" value="{{old('deliveryCountry')}}">
+										<input name="deliveryCountry" class="form-control" type="text" value="{{old('deliveryCountry',$checkout->getDeliveryCountry())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('deliveryCountry'))
@@ -163,7 +163,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Delivery City:</label>  
 									<div class="col-md-5">
-										<input name="deliveryCity" class="form-control" type="text" value="{{old('deliveryCity')}}">
+										<input name="deliveryCity" class="form-control" type="text" value="{{old('deliveryCity',$checkout->getDeliveryCity())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('deliveryCity'))
@@ -178,7 +178,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Delivery ZIP Code:</label>  
 									<div class="col-md-5">
-										<input name="deliveryZip" class="form-control" type="text" value="{{old('deliveryZip')}}">
+										<input name="deliveryZip" class="form-control" type="text" value="{{old('deliveryZip',$checkout->getDeliveryZip())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('deliveryZip'))
@@ -193,7 +193,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Delivery Address:</label>  
 									<div class="col-md-5">
-										<input name="deliveryAddress" class="form-control" type="text" value="{{old('deliveryAddress')}}">
+										<input name="deliveryAddress" class="form-control" type="text" value="{{old('deliveryAddress',$checkout->getDeliveryAddress())}}">
 									</div>
 									<div class="col-md-4">
 										@if($errors->has('deliveryAddress'))
@@ -209,7 +209,7 @@
 							<fieldset>
 								<legend></legend>
 								<div class="form-group text-right">
-									<a href="#" class="btn btn-default pull-left">Back</a>
+									<a href="{{route('shopping-cart')}}" class="btn btn-default pull-left">Back</a>
 									<button type="submit" class="btn btn-success">
 										<i class="fa fa-credit-card"></i>
 										Next
