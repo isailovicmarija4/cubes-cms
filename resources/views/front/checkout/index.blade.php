@@ -18,7 +18,7 @@
 					<div class="col-md-12 blog-post">
 						<!-- system messages -->
 						
-						<form action="" method="post" class="form-horizontal">
+						<form id="checkout-form" action="" method="post" class="form-horizontal">
 							{{csrf_field()}}
 							<fieldset>
 								<!-- Form Name -->
@@ -131,14 +131,14 @@
 									</div>
 								</div>
 							</fieldset>
-							<fieldset readonly>
+							<fieldset  >
 
 								<!-- Form Name -->
 								<legend>
 									Delivery
 									<div class="pull-right">
-										<label>
-											<input type="checkbox" id="check_delivery_same" name="kk">
+										<label id="check_delivery_same">
+											<input type="checkbox">
 											<small>same as your address</small>
 										</label>
 									</div>
@@ -222,3 +222,41 @@
 			</div>
 		</div>
 @endsection
+@push('footer_javascript')
+<script>
+$('#check_delivery_same').on('click',function(e){
+    var targetElement=$(this);
+    if(targetElement.find('input[type="checkbox"]').is(':checked')){
+      $('#checkout-form [name^="delivery"]').attr('readonly', 'readonly')  ;
+    $('#checkout-form [name^="deliveryCountry"]').val(
+            $('#checkout-form [name="customerCountry"]').val()  );
+       $('#checkout-form [name^="deliveryCity"]').val(
+            $('#checkout-form [name="deliveryCity"]').val()  );
+       $('#checkout-form [name^="deliveryZip"]').val(
+            $('#checkout-form [name="customerZip"]').val()  );
+       $('#checkout-form [name^="deliveryCity"]').val(
+            $('#checkout-form [name="customerCity"]').val()  );
+        }else{
+              $('#checkout-form [name^="delivery"]').removeAttr('readonly');
+        }
+    
+    
+    
+    
+});
+$('#checkout-form [name="customerCountry"]').on('keyup',function(e){
+     var targetElement=$(this);
+     if($('#check_delivery_same input[type="checkbox"]').is(':checked')){
+       $('#checkout-form [name="deliveryCountry"]').val( targetElement.val());
+              }
+     });   
+
+            
+
+           
+
+
+
+
+</script>
+@endpush

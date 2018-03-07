@@ -18,10 +18,10 @@
 	<div class="container portfolio">
 		<div class="row">
 			<div class="col-md-12">
-				<!-- system Messages -->
+				@include('front.global-partials.system-messages')
 				
 				<div class="jumbotron">
-					<h1>Order #32121</h1>
+					<h1>Order #{{$order->id}}</h1>
 				</div>
 				<hr>
 				<h2>Order Items</h2>
@@ -35,33 +35,36 @@
 						<th class="text-right" colspan="2">Subtotal</th>
 					</thead>
 					<tbody>
+                                            @foreach($order->orderItems as $orderItem)
 						<tr>
 							<td class="text-center">
-								1
+								  {{$loop->iteration}}
 							</td>
 							<td>
-								<img src="/skins/front/img/portfolio/enkel-home-blue.png" style="width: 100px;" alt="">
-							</td>
-							<td>Samsung UE-32J4000AWXXH</td>
+                                                            @if($orderItem->product_photo_url)
+                                                            <img src="{{$orderItem->product_photo_url}}" style="width: 100px;" alt="">
+                                                            @endif
+							</td{{$orderItem->product_title}}</td>
 							<td class="text-right">
-								32985.76
+								{{number_format($orderItem->product_price,2)}}
 								din.
 							</td>
 							<td class="text-center">x</td>
 							<td class="text-right">
-								2
+								{{$orderItem->quantity}}
 							</td>
 							<td class="text-center">=</td>
 							<td class="text-right">
-								65971.52
+									{{number_format($orderItem->subtotal(),2)}}
 								din.
 							</td>
 						</tr>
+                                                @endforeach
 					</tbody>
 					<tfoot>
 						<th class="h2 text-right" colspan="7">TOTAL:</th>
 						<td class="h2 text-right">
-							65971.52
+							{{number_format($order->total())}}
 							din.
 						</td>
 					</tfoot>
@@ -74,24 +77,25 @@
 							<tbody>
 								<tr>
 									<th>Name:</th>
-									<td>First Last</td>
+									<td>{{$order->customer_name}}</td>
 								</tr>
 								<tr>
 									<th>Email:</th>
-									<td>mailbox@example.com</td>
+									<td>{{$order->customer_email}}</td>
 								</tr>
 								<tr>
 									<th>Phone:</th>
-									<td>+381 63 338 923</td>
+									<td>{{$order->customer_phone}}</td>
 								</tr>
 								<tr>
 									<th>Address:</th>
 									<td>
-										Customer Street 34
+										{{$order->customer_address}}
 										<br>
-										11000 Belgrade
+										{{$order->customer_zip}}
+                                                                                {{$order->customer_city}}
 										<br>
-										Serbia
+										{{$order->customer_country}}
 									</td>
 								</tr>
 							</tbody>
@@ -100,9 +104,10 @@
 					<div class="col-md-6 text-right">
 						<h2>Delivery Address</h2>
 						<div class="well well-lg">
-							<p>Street Addres 35/22</p>
-							<p>11000 Belgrade</p>
-							<p>Serbia</p>
+							<p>{{$order->delivery_address}}</p>
+							<p>{{$order->delivery_zip}}
+                                                        {{$order->delivery_city}}</p>
+							<p>{{$order->delivery_country}}</p>
 						</div>
 					</div>
 				</div>

@@ -30,6 +30,7 @@ Route::post('/shopping-cart/remove-product', 'ShoppingCartController@removeProdu
 Route::get('/checkout', 'CheckoutController@index')->name('checkout');
 Route::post('/checkout', 'CheckoutController@process');
 Route::get('/checkout/confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+Route::post('/checkout/confirmation', 'CheckoutController@confirm');
 Route::get('/checkout/finish', 'CheckoutController@finish')->name('checkout.finish');
 
 Auth::routes();

@@ -87,4 +87,8 @@ class ShoppingCart {
       }
     return $total;
   }
+  public function clearItems(){
+      $this->items=[];
+      return $this;
+  }
 }

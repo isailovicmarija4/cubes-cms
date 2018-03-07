@@ -18,7 +18,7 @@
 	<div class="container portfolio">
 		<div class="row">
 			<div class="col-md-12">
-				<!-- system Messages -->
+			@include('front.global-partials.system-messages')
 				
 				<h2>Shopping Cart</h2>
 				<table id="shopping-cart-table" class="table table-striped table-hover">
@@ -31,33 +31,38 @@
 						<th class="text-right" colspan="2">Subtotal</th>
 					</thead>
 					<tbody>
+                                            @foreach($shoppingCart->getItems() as $shoppingCartItem)
 						<tr>
 							<td class="text-center">
-								1
+                                                            {{$loop->iteration}}
+								
 							</td>
 							<td>
-								<img src="/skins/front/img/portfolio/enkel-home-blue.png" style="width: 100px;" alt="">
+                                                            @if($shoppingCartItem->getProductPhotoUrl())
+								<img src="{{$shoppingCartItem->getProductPhotoUrl()}}" style="width: 100px;" alt="">
+                                                                @endif
 							</td>
-							<td>Samsung UE-32J4000AWXXH</td>
+							<td>{{$shoppingCartItem->getProductTitle()}}</td>
 							<td class="text-right">
-								32985.76
+								{{number_format($shoppingCartItem->getProductPrice(),2)}}
 								din.
 							</td>
 							<td class="text-center">x</td>
 							<td class="text-right">
-								2
+								{{$shoppingCartItem->getQuantity()}}
 							</td>
 							<td class="text-center">=</td>
 							<td class="text-right">
-								65971.52
+								{{number_format($shoppingCartItem->subtotal(),2)}}
 								din.
 							</td>
 						</tr>
+                                                @endforeach
 					</tbody>
 					<tfoot>
 						<th class="h2 text-right" colspan="7">TOTAL:</th>
 						<td class="h2 text-right">
-							65971.52
+						{{number_format($shoppingCart->total(),2)}}
 							din.
 						</td>
 					</tfoot>
@@ -74,20 +79,21 @@
 								</tr>
 								<tr>
 									<th>Email:</th>
-									<td>mailbox@example.com</td>
+									<td>{{$checkout->getCustomerEmail()}}</td>
 								</tr>
 								<tr>
 									<th>Phone:</th>
-									<td>+381 63 338 923</td>
+									<td>{{$checkout->getCustomerPhone()}}</td>
 								</tr>
 								<tr>
 									<th>Address:</th>
 									<td>
-										Customer Street 34
+										{{$checkout->getCustomerAddress()}}
 										<br>
-										11000 Belgrade
+										{{$checkout->getCustomerZip()}}
+                                                                                {{$checkout->getCustomerCity()}}
 										<br>
-										Serbia
+										{{$checkout->getCustomerCountry()}}
 									</td>
 								</tr>
 							</tbody>
@@ -96,9 +102,11 @@
 					<div class="col-md-6 text-right">
 						<h2>Delivery Address</h2>
 						<div class="well well-lg">
-							<p>Street Addres 35/22</p>
-							<p>11000 Belgrade</p>
-							<p>Serbia</p>
+							<p>{{$checkout->getDeliveryAddress()}}</p>
+							<p>{{$checkout->getDeliveryZip()}}
+                                                        {{$checkout->getDeliveryCity()}}
+                                                        </p>
+							<p>	{{$checkout->getDeliveryCountry()}}</p>
 						</div>
 					</div>
 				</div>
